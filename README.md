@@ -19,6 +19,7 @@ bamqc.sh bamfile1 bamfile2 collect_table.tsv
 ```bash
 vcfqc.sh bamfile1 bamfile2 collect_table.tsv
 ```
+note: you can concatenate multiple comparisons into a single `collect_table.tsv`. 
 ## Comparison metrics
 BAM comparison metrics:
 * Difference of QC-passed reads (`qc_passed_diff`)
