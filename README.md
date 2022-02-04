@@ -1,7 +1,7 @@
 # GHGA QC tools
 
 ## Overview
-These two scripts can be used to compare two BAM (`bamqc.sh`) or two VCF (`vcfqc.sh`) files on different metrics.
+The two main scripts can be used to compare two BAM (`bamqc.sh`) or two VCF (`vcfqc.sh`) files on different metrics.
 Results of each comparison are collected in a table that has to be specified in the input parameters (`collect_table.tsv`).
 
 
@@ -10,6 +10,12 @@ Requirements are:
 * Bcftools >= 1.6
 * python >= 3
 * pandas >= 1.0.0
+
+In addition theres is also a quick wrapper script for comparing two bamfiles (`quick_bam_comparison.sh`). It first checks md5sums of both files, if they are unequal it runs the picard CompareSAMs tool with stringent settings. These results will not not be collected in a central table. The script will only produce the picard results table.
+
+
+Requirements are: 
+* picard >= 2.19.1
 
 ## Run tools
 ```bash
@@ -20,7 +26,13 @@ bamqc.sh bamfile1 bamfile2 collect_table.tsv
 vcfqc.sh bamfile1 bamfile2 collect_table.tsv
 ```
 note: you can concatenate multiple comparisons into a single `collect_table.tsv`. 
-## Comparison metrics
+
+```bash
+quick_bam_comparison.sh bamfile1 bamfile2 picard_memory picard_output_file
+```
+note: picard_memory has to be in java conform format (see https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html)
+
+## Comparison metrics of bamqc.sh and vcfqc.sh
 BAM comparison metrics:
 * Difference of QC-passed reads (`qc_passed_diff`)
 * Difference of mapped reads (`mapped_reads_diff`)
