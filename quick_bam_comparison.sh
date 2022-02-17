@@ -3,14 +3,7 @@
 BAM1=$1
 BAM2=$2
 MEM=$3
-PICARDOUTP_DIR=$4
-
-# check picard in PATH
-if [[ $(type -P "picard" | wc -l) == 0 ]]; then
-    echo PLEASE ADD PICARD TO PATH VARIABLE
-    return
-    exit 1
-fi
+PICARDOUTP_PATH=$4
 
 # check md5sums
 if [[ $(md5sum "$BAM1" | cut -f 1 -d " ") == $(md5sum "$BAM2" | cut -f 1 -d " ") ]]; then
@@ -18,5 +11,12 @@ if [[ $(md5sum "$BAM1" | cut -f 1 -d " ") == $(md5sum "$BAM2" | cut -f 1 -d " ")
 else  # if unequal, run picard comparesams
     echo FILES ARE NOT EQUAL, RUNNING PICARD COMPARE BAMS
     echo
-    echo picard -Xmx"${MEM}" CompareSAMs "$BAM1" "$BAM2" -O "$PICARDOUTP_DIR"
+    # check picard in PATH
+    if [[ $(type -P "picard" | wc -l) == 0 ]]; then
+        echo PLEASE ADD PICARD TO PATH VARIABLE
+        return
+        exit 1
+    fi
+    
+    echo picard -Xmx"${MEM}" CompareSAMs "$BAM1" "$BAM2" -O "$PICARDOUTP_PATH"
 fi
