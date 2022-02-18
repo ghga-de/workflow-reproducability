@@ -19,7 +19,11 @@ vcf_1=$1
 vcf_2=$2
 collect_tsv=$3
 
-# check if vars legit & vcfs are bg zipped & index
+if [[ ! -f $vcf_1 ]] || [[ ! -f $vcf_2 ]]; then
+	echo ONE OR BOTH INPUTFILES ARE NOT VALID
+	return 
+	exit 1
+fi
 
 echo logging results at: $collect_tsv
 
@@ -91,7 +95,7 @@ for i in $(seq 0 $(expr ${#fields[@]} - 1));do
 done
 
 # remove temp files
-rm vcf_log.tmp merge.vcf stats_1.tmp stats_2.tmp
+rm vcf_log.tmp stats_1.tmp stats_2.tmp merge.vcf
 
 # build chromosomes for var per chr count
 chromosomes="$(zcat  $vcf_1 | grep -v "^#" | cut -d $'\t' -f 1 | uniq | less)"

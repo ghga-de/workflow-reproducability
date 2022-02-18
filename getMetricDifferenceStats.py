@@ -9,7 +9,7 @@ req_fields = ["DP", "MQ", "QD"]
 vcf = pd.read_csv(path, sep="\t", comment="#", header=None)
 vcf.columns = ["#CHROM", "POS", "ID", "REF", "ALT", "QUAL", "FILTER", "INFO", "FORMAT", "Sample1", "Sample2"]
 
-# extract relevant info fields together
+# extract relevant info fields together, inside vcf info col: ...DP=3,3;MQ=24.04,24.04;QD=24.28,24.28...
 collect = vcf["INFO"].apply(lambda x: {entry.split("=")[0]:entry.split("=")[1] for entry in x.split(";") if entry.split("=")[0] in req_fields})
 new_collect = [x for x in collect]  # to avoid weird pointer issues
 

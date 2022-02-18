@@ -14,6 +14,12 @@ bam_2=$2
 collect_tsv=$3
 readlen=101  # used for depth calculation
 
+if [[ ! -f $bam_1 ]] || [[ ! -f $bam_2 ]]; then
+	echo ONE OR BOTH INPUTFILES ARE NOT VALID
+	return 
+	exit 1
+fi
+
 echo logging results at: $3
 
 # get name tag of comparison
