@@ -1,2 +1,4 @@
 *.tmp
 *.tsv
+*.vcf
+nohup.out

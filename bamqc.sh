@@ -73,7 +73,6 @@ done
 # if collect table doe not exist -> create new file w/ header
 # else ->  append values to existing table
 if [[ ! -f $collect_tsv ]]; then
-	echo "$output_header"
 	echo -e "$output_header" > $collect_tsv
 	echo -e "$output_values" >> $collect_tsv
 else
