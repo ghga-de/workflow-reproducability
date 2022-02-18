@@ -19,13 +19,16 @@ Requirements are:
 
 ## Run tools
 ```bash
-bamqc.sh bamfile1 bamfile2 collect_table.tsv
+bamqc.sh bamfile1 bamfile2 collect_bam_table.tsv
 ```
 
 ```bash
-vcfqc.sh bamfile1 bamfile2 collect_table.tsv
+vcfqc.sh vcffile1 vcffile2 collect_vcf_table.tsv
 ```
-note: you can concatenate multiple comparisons into a single `collect_table.tsv`. 
+note: vcf inputs for `vcfqc.sh` have to be bgzipped & indexed
+
+
+also note: you can concatenate multiple comparisons for each bamqc & vcfqc into a single `collect_table.tsv`. 
 
 ```bash
 quick_bam_comparison.sh bamfile1 bamfile2 picard_memory picard_output_file
@@ -47,5 +50,5 @@ VCF comparison metrics:
 * Number of genotype mismatches (`gt_mismatches`)
 * Difference of transition/transversion ratios (`Ti/Tv_diff`)
 * Mean and standard deviation of DP, MQ and QD differences (`DP_mean`, `DP_std`, `MQ_mean` ... `QD_std`)	
-* Difference of variant per chromosome (`chr1_diff` ... `chrY_diff`)
+* Difference of variant per chromosome (`chr1_diff`, `chr2_diff`  ... `chrY_diff`)
 
