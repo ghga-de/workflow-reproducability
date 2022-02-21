@@ -2,18 +2,7 @@
 
 # requirements: bcftools, python3 w/ pandas
 
-if [[ $(type -P "bcftools" | wc -l) == 0 ]]; then
-	echo PLEASE ADD SAMTOOLS TO PATH 
-	return
-	exit 1
-fi
 BCFTOOLS=$(which bcftools)  # should be given by conda 
-
-if [[ $(type -P "python3" | wc -l) == 0 ]]; then
-	echo PLEASE ADD PYTHON3 W/ PANDAS TO PATH 
-	return
-	exit 1
-fi
 
 vcf_1=$1
 vcf_2=$2

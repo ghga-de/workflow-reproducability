@@ -22,14 +22,21 @@ example calc_df:
         3,3  24.04,24.04  24.28,24.28
 '''
 
-# get difference of values
+# get difference of comma separated values from calc_df
 mean_stds = {}  # "QD" : [mean, std]
 for field in req_fields:
     differences = calc_df[field].apply(lambda x: abs(float(x.split(",")[0]) - float(x.split(",")[1])))
     mean_stds[field] = [differences.mean(), differences.std()]
     
-output_df = pd.DataFrame(mean_stds)  # cols: metrics, rows: mean, std_dev
+output_df = pd.DataFrame(mean_stds)  
 output_df.index = ["mean", "std_dev"]
 output_df = output_df.round(decimals=2)
+
+'''
+example output:
+	DP	MQ	QD
+mean	0.0	0.0	0.0
+std_dev	0.0	0.0	0.0
+'''
 
 output_df.to_csv(outpath, sep="\t")

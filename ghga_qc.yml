@@ -1,0 +1,11 @@
+name: ghga_qc
+channels:
+  - bioconda
+  - anaconda
+  - defaults
+dependencies:
+  - bcftools=1.9
+  - python=3.8.3
+  - pandas=1.1.3
+  - picard=2.26.10
+  - samtools=1.9

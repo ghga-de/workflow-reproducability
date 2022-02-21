@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# requirements: samtools 
-if [[ $(type -P "samtools" | wc -l) == 0 ]]; then
-	echo PLEASE ADD SAMTOOLS TO PATH VARIABLE
-	return
-	exit 1
-fi
 SAMTOOLS="$(which samtools)"
 
 READLEN=101
@@ -22,7 +16,7 @@ fi
 
 echo logging results at: $3
 
-# get name tag of comparison
+# get name tag of comparison, first 3 chars of each bamfile 
 comp_name=$(basename $bam_1 | cut -b 1-3)_$(basename $bam_2 | cut -b 1-3)
 
 # define variables to store header & vales in 
@@ -76,6 +70,9 @@ for i in $(seq 0 $(expr ${#chrs[@]} - 1));do
 	output_values="$output_values	$diff_dp"
 done
 
+# remove tmp files
+rm bam1_stats.tmp bam2_stats.tmp bam1_idxstats.tmp bam2_idxstats.tmp
+ 
 # if collect table doe not exist -> create new file w/ header
 # else ->  append values to existing table
 if [[ ! -f $collect_tsv ]]; then
